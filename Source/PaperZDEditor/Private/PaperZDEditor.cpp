@@ -41,6 +41,9 @@
 #include "ISequencerModule.h"
 #include "PaperZDAnimationTrackEditor.h"
 
+//Tools
+#include "Tools/PaperZDContentBrowserExtension.h"
+
 #define LOCTEXT_NAMESPACE "FPaperZDEditorModule"
 void FPaperZDEditorModule::StartupModule()
 {
@@ -69,6 +72,12 @@ void FPaperZDEditorModule::StartupModule()
 	//Register the custom graph factories
 	RegisterGraphFactories();
 
+	//Register tools
+    if (!IsRunningCommandlet())
+    {
+        FPaperZDContentBrowserExtension::InstallHooks();
+    }
+
 	//Finally register the EditorProxy, so the runtime part can configure editor-only functionalities when this module is up and running
 	FPaperZDRuntimeEditorProxy::Register();
 }
@@ -79,6 +88,11 @@ void FPaperZDEditorModule::ShutdownModule()
 	UnregisterGraphFactories();
 
 	FPaperZDAnimBPEditor::UnregisterDefaultEventNodes();
+
+    if (!IsRunningCommandlet())
+    {
+        FPaperZDContentBrowserExtension::RemoveHooks();
+    }
 }
 
 void FPaperZDEditorModule::RegisterCompiler()
@@ -90,7 +104,6 @@ void FPaperZDEditorModule::RegisterCompiler()
 	FPaperZDAnimBPCompilerContext::RegisterCompileHandleFactory<FPaperZDCompilerFactory_Base>();
 	FPaperZDAnimBPCompilerContext::RegisterCompileHandleFactory<FPaperZDCompilerFactory_StateMachine>();
 	FPaperZDAnimBPCompilerContext::RegisterCompileHandleFactory<FPaperZDCompilerFactory_CacheAnimation>();
-	//FPaperZDAnimBPCompilerContext::RegisterCompileHandleFactory<FPaperZDCompilerFactory_CustomNotify>();
 }
 
 void FPaperZDEditorModule::RegisterSettings()
