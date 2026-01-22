@@ -3,6 +3,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SharedPointer.h"
+#include "AssetRegistry/AssetData.h"
 
 class UEdGraph;
 class UPaperZDAnimBP;
@@ -43,4 +44,7 @@ public:
 	virtual void UpdateVersionToAnimBlueprintRework(UPaperZDAnimBP* InAnimBP) = 0;
 	virtual void UpdateVersionToAnimationSourceAdded(UPaperZDAnimBP* InAnimBP) = 0;
 	virtual void UpdateVersionToAnimationSourceAdded(UPaperZDAnimSequence* InAnimSequence) = 0;
+
+	//Helper for getting the animation sequences of a graph
+	virtual TArray<FAssetData> GetAnimSequencesForSource(UPaperZDAnimationSource* Source) = 0;
 };

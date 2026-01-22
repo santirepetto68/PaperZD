@@ -10,6 +10,7 @@
 
 class UPaperZDAnimSequence;
 class UPaperZDAnimPlayer;
+class UPaperZDAnimationSkin;
 class UWorld;
 class UFunction;
 class APaperZDCharacter;
@@ -146,6 +147,14 @@ public:
 	/* Obtains the current player, responsible of storing the playback information of this AnimInstance. */
 	UFUNCTION(BlueprintPure, Category = "PaperZD|Playback")
 	UPaperZDAnimPlayer* GetPlayer() const;
+
+	/* Applies a skin on a specific animation layer. */
+	 UFUNCTION(BlueprintCallable, Category = "Playback")
+	 void ApplyAnimationSkinToLayer(UPaperZDAnimationSkin* Skin, int32 Layer = 0);
+
+	 /* Clears any skin from the given layer. */
+	 UFUNCTION(BlueprintCallable, Category = "Playback")
+	 void RemoveSkinsFromLayer(int32 Layer = 0);
 
 	/**
 	 * Event called when we update playback, changing to a new sequence. 

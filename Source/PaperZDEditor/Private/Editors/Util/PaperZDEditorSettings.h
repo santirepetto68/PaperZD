@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Tools/PaperZDExtractFlipbookFromTextureSettings.h"
 #include "PaperZDEditorSettings.generated.h"
 
 //fwd declarations
@@ -53,16 +54,6 @@ public:
  	/* Colors to use on the time nodes for the montages. */ 
  	//UPROPERTY(EditAnywhere, config, Category = "Montages")  //@NOTE: Pending for montages 
  	FLinearColor SectionTimingNodeColor;
- 
-// 	UPROPERTY(EditAnywhere, config, Category = "Montages")
-// 	FLinearColor NotifyTimingNodeColor;
-// 
-// 	UPROPERTY(EditAnywhere, config, Category = "Montages")
-// 	FLinearColor BranchingPointTimingNodeColor;
-
-// 	/** Snap value used to determine scrub resolution of the curve timeline */
-// 	UPROPERTY(EditAnywhere, config, Category = "Timeline settings")
-// 	float CurveEditorSnapInterval;
 
 	/** Snap value used to determine scrub resolution of the anim timeline */
 	UPROPERTY(EditAnywhere, config, Category = "Timeline settings")
@@ -75,14 +66,14 @@ public:
 	/** Whether to display percentage in the anim timeline */
 	UPROPERTY(EditAnywhere, config, Category = "Timeline settings")
 	bool bTimelineDisplayPercentage;
-// 
-// 	/** Whether to display keys in the timeline's curve tracks */
-// 	UPROPERTY(EditAnywhere, config, Category = "Timeline settings")
-// 	bool bTimelineDisplayCurveKeys;
 
 	/** Whether to snap to various things */
 	UPROPERTY(EditAnywhere, config, Category = "Timeline settings")
 	TArray<FName> TimelineEnabledSnaps;
+
+	/** The saved presets for the extractor tool */
+    UPROPERTY(EditAnywhere, config, Category = "Extract Flipbook Tool")
+    TArray<FPaperZDExtractFlipbookPreset> ExtractFlipbookToolPresets;
 
 public:
 	virtual bool CanEditChange(const FProperty* InProperty) const;

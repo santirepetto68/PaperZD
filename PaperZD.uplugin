@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 28,
-	"VersionName": "2.1.4",
+	"Version": 29,
+	"VersionName": "2.2.0",
 	"FriendlyName": "PaperZD",
 	"Description": "Animation Graph and Notify Support for 2D Development",
 	"Category": "Other",

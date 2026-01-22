@@ -5,6 +5,7 @@
 #include "SEditorViewport.h"
 #include "SCommonEditorViewportToolbarBase.h"
 #include "PaperZDAnimationSourceViewportClient.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 class UPaperZDAnimationSource;
 
