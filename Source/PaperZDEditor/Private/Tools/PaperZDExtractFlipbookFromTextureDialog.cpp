@@ -894,20 +894,15 @@ void SPaperZDExtractFlipbookFromTextureDialog::ExtractFlipbooks()
                         NewAsset->bDirectionalSequence = FlipbooksNum > 1;
                         NewAsset->Category = *AnimSequenceSettings.Category;
 
-                        if (FProperty* Property = FindFProperty<FProperty>(UPaperZDAnimSequence_Flipbook::StaticClass(), TEXT("AnimDataSource")))
-                        {
-                            if (TArray<TObjectPtr<UPaperFlipbook>>* AnimDataSourcePtr = reinterpret_cast<TArray<TObjectPtr<UPaperFlipbook>>*>(Property->ContainerPtrToValuePtr<void>(NewAsset)))
-                            {
-                                (*AnimDataSourcePtr).Empty();
-                                (*AnimDataSourcePtr).Init(nullptr, FlipbooksNum);
-                            }
-                        }
-
-                        AnimSequence = NewAsset;
+                        TArray<FPaperZDFlipbookAnimDataSource>& AnimDataSource = NewAsset->AnimData;
+                        AnimDataSource.Empty();
+                        AnimDataSource.Init(nullptr, FlipbooksNum);
 
                         FAssetRegistryModule::AssetCreated(NewAsset);
                         NewAsset->MarkPackageDirty();
                         NewAsset->PostEditChange();
+
+                        AnimSequence = NewAsset;
 
                         ObjectsToSync.Add(NewAsset);
                         AnimSequences.Add(AnimationSequenceID, AnimSequence);
